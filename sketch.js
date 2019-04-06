@@ -1,3 +1,4 @@
+// 1 Astronomical Unit = distance from Sun to Earth in m
 const AU = 1.496 * Math.pow(10,11);
 
 const sunDiameter = 1.391 * Math.pow(10,9);
@@ -37,6 +38,7 @@ function draw() {
 	background(0);
 
  	sun.show();
+	
 	mercury.show();
 	venus.show();
 	earth.show();
