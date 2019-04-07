@@ -8,7 +8,7 @@ function Star(diameter,mass) {
   let diamScale = map(this.d, 4000, 1500000000, 4, 50);
 
   noStroke();
-  fill(255,255,0);
+  fill(225,225,0);
   ellipse(windowWidth/2, windowHeight/2, diamScale, diamScale);
 
   }
