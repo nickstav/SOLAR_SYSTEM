@@ -15,9 +15,10 @@ const sat = [116460, 5.683 * Math.pow(10,26), 10.07*AU, 9.537*AU, 0.057];
 const ura = [50724, 8.681 * Math.pow(10,25), 20.1*AU, 19.191*AU, 0.046];
 const nep = [49244, 1.024 * Math.pow(10,26), 30.4*AU, 30.069*AU, 0.011];
 
+//TODO - sort out colour function
 var grey = 125;
 
-//var sunimg = createPattern(sun.jpg,repeat);
+//TODO - var sunimg = createPattern(sun.jpg,repeat);
 
 
 function setup() {
@@ -33,6 +34,7 @@ function setup() {
 	uranus = new Planet(ura[0], ura[1], ura[2], ura[3], ura[4], grey);
 	neptune = new Planet(nep[0], nep[1], nep[2], nep[3], nep[4], grey);
 
+	//noLoop();
 }
 
 function draw() {
@@ -49,7 +51,5 @@ function draw() {
 	uranus.show();
 	neptune.show();
 
-	//mercury.showOrbit();
+	mercury.showOrbit();
 }
-
-noLoop();
