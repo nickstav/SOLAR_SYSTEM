@@ -10,13 +10,12 @@ function Planet(diameter, mass, aphelion, semiMajorAxis, eccentricity, colour) {
   //scale the planet's diameter in comparison to its neighbours
   this.diamScale = map(this.d, 4000, 150000, 4, 20);
 
-  //scale the planet's orbital parameters logarithmically
-  // let sunEdge = Math.log(sunDiameter/4);
-  // let distScale = map(Math.log(this.dist), sunEdge, 30, 0, windowWidth/2);
-  // this.a_scaled = map(Math.log(this.a), sunEdge, 30, 0, windowWidth/2);
+  this.returnLoggedDistance = function(value){
+    return map(Math.log(value), 21, 30, 0, windowHeight/2);
+  }
 
   //the planet's x and y coordinated w.r.t. the sun's centre
-  this.pixelOffset = map(Math.log(this.dist), 0, 30, 0, windowWidth/2);
+  this.pixelOffset = this.returnLoggedDistance(this.dist);
   this.x = windowWidth/2 - this.pixelOffset;
   this.y = windowHeight/2;
 
@@ -31,7 +30,7 @@ function Planet(diameter, mass, aphelion, semiMajorAxis, eccentricity, colour) {
   this.showOrbit = function() {
     for (var theta = 0; theta <= TWO_PI; theta += PI/16) {
       let r = (this.a * (1 - Math.pow(this.e, 2))) / (1 + this.e * cos(theta));
-      let rMapped = map(Math.log(r), 0, 30, 0, windowWidth/2);
+      let rMapped = this.returnLoggedDistance(r);
       stroke(255);
       point(rMapped*cos(theta) + windowWidth/2, rMapped*sin(theta) + windowHeight/2);
     }
