@@ -1,4 +1,4 @@
-function Planet(diameter, mass, aphelion, semiMajorAxis, eccentricity, colour) {
+function Planet(diameter, mass, aphelion, semiMajorAxis, eccentricity, period, colour) {
 
   this.d = diameter;
   this.m = mass;
@@ -6,6 +6,10 @@ function Planet(diameter, mass, aphelion, semiMajorAxis, eccentricity, colour) {
   this.dist = aphelion;
   this.a = semiMajorAxis;
   this.e = eccentricity;
+  this.T = period;
+  this.theta = random(0, TWO_PI);;
+
+  this.angularVelocity = TWO_PI / (this.T);
 
   //scale the planet's diameter in comparison to its neighbours
   this.diamScale = map(this.d, 4000, 150000, 4, 20);
@@ -21,18 +25,21 @@ function Planet(diameter, mass, aphelion, semiMajorAxis, eccentricity, colour) {
   this.y = windowHeight/2;
 
   //draw the planet
-  this.showAph = function() {
+  this.showAphelion = function() {
     noStroke();
     fill(this.c);
     ellipse(this.x, this.y, this.diamScale, this.diamScale);
   }
 
   //option to show the path of the planet's orbit
-  this.show = function(theta) {
-      let r = (this.a * (1 - Math.pow(this.e, 2))) / (1 + this.e * cos(theta));
+  this.show = function() {
+      this.oldTheta = this.theta;
+      this.theta = this.oldTheta + this.angularVelocity;
+      let r = (this.a * (1 - Math.pow(this.e, 2))) / (1 + this.e * cos(this.theta));
       let rMapped = this.returnLoggedDistance(r);
-      stroke(255);
-      point(rMapped*cos(theta) + windowWidth/2, rMapped*sin(theta) + windowHeight/2);
+      noStroke();
+      fill(this.c);
+      ellipse(rMapped*cos(this.theta) + windowWidth/2, rMapped*sin(this.theta) + windowHeight/2, this.diamScale, this.diamScale);
   }
 
 }
