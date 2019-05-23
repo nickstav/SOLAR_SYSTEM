@@ -1,8 +1,8 @@
-function Planet(diameter, mass, aphelion, semiMajorAxis, eccentricity, period, colour) {
+function Planet(diameter, mass, aphelion, semiMajorAxis, eccentricity, period, c1, c2, c3) {
 
   this.d = diameter;
   this.m = mass;
-  this.c = colour;
+  this.c = color(c1,c2,c3);
   this.dist = aphelion;
   this.a = semiMajorAxis;
   this.e = eccentricity;
@@ -25,14 +25,14 @@ function Planet(diameter, mass, aphelion, semiMajorAxis, eccentricity, period, c
   this.x = windowWidth/2 - this.pixelOffset;
   this.y = windowHeight/2;
 
-  //draw the planet
+  //draw the planet at it's furthest point from the Sun
   this.showAphelion = function() {
     noStroke();
     fill(this.c);
     ellipse(this.x, this.y, this.diamScale, this.diamScale);
   }
 
-  //option to show the path of the planet's orbit
+  //show the path of the planet's orbit
   this.show = function() {
       this.oldTheta = this.theta;
       this.theta = this.oldTheta + this.angularVelocity;
